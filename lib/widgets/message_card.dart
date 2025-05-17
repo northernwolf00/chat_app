@@ -12,7 +12,7 @@ import '../helper/my_date_util.dart';
 import '../main.dart';
 import '../models/message.dart';
 
-// for showing single message details
+
 class MessageCard extends StatefulWidget {
   const MessageCard({super.key, required this.message});
 
@@ -31,7 +31,7 @@ class _MessageCardState extends State<MessageCard> {
         child: isMe ? _greenMessage() : _blueMessage());
   }
 
-  // sender or another user message
+
   Widget _blueMessage() {
   if (widget.message.read.isEmpty) {
     APIs.updateMessageReadStatus(widget.message);
@@ -96,7 +96,7 @@ class _MessageCardState extends State<MessageCard> {
 }
 
 
-  // our or user message
+
  Widget _greenMessage() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
@@ -164,7 +164,7 @@ class _MessageCardState extends State<MessageCard> {
 }
 
 
-  // bottom sheet for modifying message details
+
   void _showBottomSheet(bool isMe) {
     showModalBottomSheet(
         context: context,
@@ -175,7 +175,7 @@ class _MessageCardState extends State<MessageCard> {
           return ListView(
             shrinkWrap: true,
             children: [
-              //black divider
+    
               Container(
                 height: 4,
                 margin: EdgeInsets.symmetric(
@@ -187,7 +187,7 @@ class _MessageCardState extends State<MessageCard> {
 
               widget.message.type == Type.text
                   ?
-                  //copy option
+               
                   _OptionItem(
                       icon: const Icon(Icons.copy_all_rounded,
                           color: Colors.blue, size: 26),
@@ -197,7 +197,7 @@ class _MessageCardState extends State<MessageCard> {
                                 ClipboardData(text: widget.message.msg))
                             .then((value) {
                           if (ctx.mounted) {
-                            //for hiding bottom sheet
+                            
                             Navigator.pop(ctx);
 
                             Dialogs.showSnackbar(ctx, 'text_copied'.tr());
@@ -205,7 +205,7 @@ class _MessageCardState extends State<MessageCard> {
                         });
                       })
                   :
-                  //save option
+               
                   _OptionItem(
                       icon: const Icon(Icons.download_rounded,
                           color: Colors.blue, size: 26),
@@ -217,7 +217,7 @@ class _MessageCardState extends State<MessageCard> {
                                   albumName: 'We Chat')
                               .then((success) {
                             if (ctx.mounted) {
-                              //for hiding bottom sheet
+                          
                               Navigator.pop(ctx);
                               if (success != null && success) {
                                 Dialogs.showSnackbar(
@@ -230,7 +230,7 @@ class _MessageCardState extends State<MessageCard> {
                         }
                       }),
 
-              //separator or divider
+             
               if (isMe)
                 Divider(
                   color: Colors.black54,
@@ -238,7 +238,7 @@ class _MessageCardState extends State<MessageCard> {
                   indent: mq.width * .04,
                 ),
 
-              //edit option
+              
               if (widget.message.type == Type.text && isMe)
                 _OptionItem(
                     icon: const Icon(Icons.edit, color: Colors.blue, size: 26),
@@ -247,12 +247,10 @@ class _MessageCardState extends State<MessageCard> {
                       if (ctx.mounted) {
                         _showMessageUpdateDialog(ctx);
 
-                        //for hiding bottom sheet
-                        // Navigator.pop(ctx);
+                   
                       }
                     }),
 
-              //delete option
               if (isMe)
                 _OptionItem(
                     icon: const Icon(Icons.delete_forever,
@@ -260,19 +258,19 @@ class _MessageCardState extends State<MessageCard> {
                     name: 'delete_text'.tr(),
                     onTap: (ctx) async {
                       await APIs.deleteMessage(widget.message).then((value) {
-                        //for hiding bottom sheet
+                     
                         if (ctx.mounted) Navigator.pop(ctx);
                       });
                     }),
 
-              //separator or divider
+    
               Divider(
                 color: Colors.black54,
                 endIndent: mq.width * .04,
                 indent: mq.width * .04,
               ),
 
-              //sent time
+       
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
                   name:
@@ -280,7 +278,7 @@ class _MessageCardState extends State<MessageCard> {
 
                   onTap: (_) {}),
 
-              //read time
+            
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.green),
                   name: widget.message.read.isEmpty
@@ -293,7 +291,7 @@ class _MessageCardState extends State<MessageCard> {
         });
   }
 
-  //dialog for updating message content
+
   void _showMessageUpdateDialog(final BuildContext ctx) {
     String updatedMsg = widget.message.msg;
 
@@ -306,7 +304,7 @@ class _MessageCardState extends State<MessageCard> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
 
-              //title
+            
               title:  Row(
                 children: [
                   Icon(
@@ -322,7 +320,7 @@ class _MessageCardState extends State<MessageCard> {
                 ],
               ),
 
-              //content
+              
               content: TextFormField(
                 initialValue: updatedMsg,
                 maxLines: null,
@@ -332,12 +330,12 @@ class _MessageCardState extends State<MessageCard> {
                         borderRadius: BorderRadius.all(Radius.circular(15)))),
               ),
 
-              //actions
+            
               actions: [
-                //cancel button
+         
                 MaterialButton(
                     onPressed: () {
-                      //hide alert dialog
+                
                       Navigator.pop(ctx);
                     },
                     child:  Text(
@@ -345,15 +343,15 @@ class _MessageCardState extends State<MessageCard> {
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                     )),
 
-                //update button
+     
                 MaterialButton(
                     onPressed: () {
                       APIs.updateMessage(widget.message, updatedMsg);
-                      //hide alert dialog
+                 
                       Navigator.pop(ctx);
 
-                      //for hiding bottom sheet
-                      Navigator.pop(ctx);
+                    
+         
                     },
                     child:  Text(
                       'update_message'.tr(),
@@ -364,7 +362,7 @@ class _MessageCardState extends State<MessageCard> {
   }
 }
 
-//custom options card (for copy, edit, delete, etc.)
+
 class _OptionItem extends StatelessWidget {
   final Icon icon;
   final String name;

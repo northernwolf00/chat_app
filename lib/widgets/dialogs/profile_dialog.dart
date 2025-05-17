@@ -22,14 +22,14 @@ class ProfileDialog extends StatelessWidget {
           height: mq.height * .35,
           child: Stack(
             children: [
-              //user profile picture
+       
               Positioned(
                 top: mq.height * .075,
                 left: mq.width * .1,
                 child: ProfileImage(size: mq.width * .5, url: user.image),
               ),
 
-              //user name
+   
               Positioned(
                 left: mq.width * .04,
                 top: mq.height * .02,
@@ -39,16 +39,15 @@ class ProfileDialog extends StatelessWidget {
                         fontSize: 18, fontWeight: FontWeight.w500)),
               ),
 
-              //info button
+           
               Positioned(
                   right: 8,
                   top: 6,
                   child: MaterialButton(
                     onPressed: () {
-                      //for hiding image dialog
+          
                       Navigator.pop(context);
 
-                      //move to view profile screen
                       Navigator.push(
                           context,
                           MaterialPageRoute(

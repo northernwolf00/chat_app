@@ -54,7 +54,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 itemCount: users.length,
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () async {
-                    // final added = await APIs.addChatUser(users[index].email);
+                    
                   },
                   child: ChatUserCardContact(
                       user: users[index],

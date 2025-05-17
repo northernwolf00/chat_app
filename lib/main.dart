@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
     return Consumer<SettingsSingleton>(
       builder: (_, settings, __) {
         return MaterialApp(
-          title: 'We Chat',
+          title: 'Oguz Chat',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: false,
